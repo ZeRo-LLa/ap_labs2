@@ -11,7 +11,7 @@ class TestRootVertex(unittest.TestCase):
             [3],
             [0]
         ]
-        self.assertTrue(is_root_vertex(graph, 5))  # з прикладу
+        self.assertTrue(is_root_vertex(graph, 5)) 
 
 if __name__ == "__main__":
     unittest.main()
