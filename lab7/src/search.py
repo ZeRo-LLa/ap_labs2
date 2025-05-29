@@ -43,12 +43,30 @@ def kmp_search(haystack, needle):
     return result
 
 
-with open('lab7/input.txt', 'r', encoding='utf-8') as f:
-    lines = f.readlines()
-    haystack = lines[0].strip()
-    needle = lines[1].strip()
+def recipes_from_file(filename):
+    recipes = {}
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            if ':' in line:
+                parts = line.strip().split(':', 1)
+                if len(parts) == 2:
+                    key, value = parts
+                    recipes[key.strip()] = value.strip()
+    return recipes
 
-indices = kmp_search(haystack, needle)
 
-with open('lab7/output.txt', 'w', encoding='utf-8') as f:
-    f.write(" ".join(map(str, indices)))
+recipes = recipes_from_file('lab7/src/recipes.txt')
+inventory = input("Your inventory: ").strip()
+
+craftable_items = []
+
+for ingredients, item in recipes.items():
+    if kmp_search(inventory, ingredients):
+        craftable_items.append(item)
+
+if craftable_items:
+    print("Can create:")
+    for item in craftable_items:
+        print("-", item)
+else:
+    print("Nothing can be crafted.")

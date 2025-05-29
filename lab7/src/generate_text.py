@@ -2,7 +2,7 @@ import random
 
 def generate_custom_input(
     filename='lab7/input.txt',
-    haystack_size=600,
+    haystack_size=100_000,
     needle='privit',
     insert_every=5000
 ):
